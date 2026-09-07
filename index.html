@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Abhilash Badgujar — Senior Gameplay Engineer &amp; Technical Lead (Unreal Engine 5 / Unity)</title>
+<meta name="description" content="Senior Gameplay Engineer &amp; Technical Lead, 7+ years. Gameplay AI, server-authoritative netcode, procedural generation and editor tooling in Unreal Engine 5 and Unity. Shipped on PC, PS5, VR and mobile. Available for senior/lead roles and selective contract work." />
+<meta name="author" content="Abhilash Badgujar" />
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="Abhilash Badgujar — Senior Gameplay Engineer &amp; Technical Lead" />
+<meta property="og:description" content="Gameplay AI, netcode, procedural worlds and editor tools in UE5 &amp; Unity. Shipped on PC, PS5, VR and mobile." />
+<meta property="og:image" content="showreel/_assets/e6.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://abhilashbadgujar.com/" /><!-- TODO: confirm this is your live domain -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2308090C'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%2334E3FF' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================================
+   DESIGN LANGUAGE — one place, one set of decisions.
+   Rules this file obeys:
+     1. Type comes from the scale below. No one-off font sizes.
+     2. Space comes from the 4px scale below. No one-off margins.
+     3. ONE accent (cyan). Violet marks depth/case-study affordances only.
+        The brand gradient appears exactly once — on the surname in the hero.
+     4. Surfaces step: page -> section -> card -> raised. Never skip a step.
+     5. Motion: one easing, two durations. Anything else is a bug.
+   ========================================================================== */
+:root{
+  /* --- surface / ink ------------------------------------------------- */
+  --ink-0:#08090C;              /* page              */
+  --ink-1:#0D1015;              /* alternating band  */
+  --ink-2:#12161E;              /* card              */
+  --ink-3:#1A202B;              /* raised / hover    */
+  --line:rgba(255,255,255,.075);
+  --line-2:rgba(255,255,255,.15);
+
+  /* --- text ----------------------------------------------------------- */
+  --text:#EDF0F6;
+  --text-2:#A6AEBF;             /* body muted        */
+  --text-3:#818B9E;             /* metadata / labels */
+
+  /* --- accent (used with intent, never decoratively) ------------------ */
+  --accent:#34E3FF;
+  --accent-dim:rgba(52,227,255,.12);
+  --accent-ink:#04222B;         /* text on accent    */
+  --deep:#A682FF;               /* case-study depth  */
+  --ok:#5BE49B;                 /* shipped / live    */
+  --brand-grad:linear-gradient(100deg,#34E3FF,#A682FF 58%,#FF5CA8);
+
+  /* --- type scale (fluid, ~1.25 ratio) -------------------------------- */
+  --f-display:clamp(42px,6.2vw,80px);
+  --f-h1:clamp(30px,3.8vw,48px);
+  --f-h2:clamp(23px,2.4vw,31px);
+  --f-h3:19px;
+  --f-h4:16px;
+  --f-lede:clamp(16.5px,1.4vw,18.5px);
+  --f-body:15.5px;
+  --f-sm:13.5px;
+  --f-mono:11.5px;
+
+  /* --- space scale ----------------------------------------------------- */
+  --s1:4px; --s2:8px;  --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* --- shape / motion --------------------------------------------------- */
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:22px; --r-pill:999px;
+  --ease:cubic-bezier(.2,.7,.3,1);
+  --t-fast:160ms;
+  --t-slow:520ms;
+  --wrap:1240px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ink-0);color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  font-size:var(--f-body);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,video,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-sm)}
+
+/* ---------- primitives ---------------------------------------------- */
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--s5)}
+.band{padding-block:var(--s9)}
+.band--alt{background:var(--ink-1);border-block:1px solid var(--line)}
+
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;margin:0;font-weight:600;line-height:1.06;letter-spacing:-.02em}
+.display{font-size:var(--f-display);font-weight:700;letter-spacing:-.035em;line-height:.95}
+.h1{font-size:var(--f-h1)}
+.h2{font-size:var(--f-h2)}
+.h3{font-size:var(--f-h3);letter-spacing:-.01em}
+.h4{font-size:var(--f-h4);letter-spacing:-.01em}
+.lede{font-size:var(--f-lede);color:var(--text-2);line-height:1.6;text-wrap:pretty;margin:var(--s4) 0 0}
+p{margin:0 0 var(--s3)}
+p:last-child{margin-bottom:0}
+
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:var(--f-mono);
+      letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+/* section header — the single repeated masthead pattern */
+.sec-head{max-width:62ch}
+.eyebrow{display:flex;align-items:center;gap:var(--s3);color:var(--accent);margin-bottom:var(--s4)}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);flex:none}
+.sec-head .lede{max-width:56ch}
+
+/* rules */
+.hr{height:1px;background:var(--line);border:0;margin:0}
+
+/* ---------- buttons -------------------------------------------------- */
+.btn{display:inline-flex;align-items:center;gap:var(--s2);padding:12px 20px;border-radius:var(--r-pill);
+     font-size:var(--f-sm);font-weight:600;letter-spacing:.005em;white-space:nowrap;
+     transition:background var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease),
+                color var(--t-fast) var(--ease),transform var(--t-fast) var(--ease)}
+.btn svg{width:15px;height:15px;flex:none}
+.btn:hover{transform:translateY(-1px)}
+.btn--primary{background:var(--accent);color:var(--accent-ink)}
+.btn--primary:hover{background:#6DEEFF}
+.btn--ghost{border:1px solid var(--line-2);color:var(--text)}
+.btn--ghost:hover{background:var(--ink-3);border-color:transparent}
+.btn--quiet{color:var(--text-2);padding-inline:0}
+.btn--quiet:hover{color:var(--accent)}
+
+/* ---------- chips / pills -------------------------------------------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;
+      padding:5px 10px;border-radius:var(--r-sm);border:1px solid var(--line);color:var(--text-2);
+      background:rgba(255,255,255,.02);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2)}
+
+.status{display:inline-flex;align-items:center;gap:var(--s2);padding:6px 13px 6px 10px;border-radius:var(--r-pill);
+        border:1px solid rgba(91,228,155,.3);background:rgba(91,228,155,.07);
+        font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok)}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ---------- card ------------------------------------------------------ */
+.card{background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5);
+      transition:border-color var(--t-fast) var(--ease),background var(--t-fast) var(--ease),
+                 transform var(--t-fast) var(--ease)}
+.card--lift:hover{border-color:var(--line-2);background:var(--ink-3);transform:translateY(-2px)}
+
+/* ---------- reveal ---------------------------------------------------- */
+[data-reveal]{opacity:0;transform:translateY(18px);
+              transition:opacity var(--t-slow) var(--ease),transform var(--t-slow) var(--ease)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ===================== NAV ============================================ */
+.nav{position:fixed;inset:0 0 auto;z-index:80;border-bottom:1px solid transparent;
+     transition:background var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease)}
+.nav.stuck{background:rgba(8,9,12,.86);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);height:66px}
+.brand{display:flex;align-items:center;gap:var(--s3);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px}
+.brand b{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;
+         background:var(--accent);color:var(--accent-ink);font-weight:700}
+.brand small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+             text-transform:uppercase;color:var(--text-3);font-weight:400}
+.nav-links{display:flex;align-items:center;gap:var(--s5)}
+.nav-links a{font-size:var(--f-sm);color:var(--text-2);transition:color var(--t-fast) var(--ease)}
+.nav-links a:hover{color:var(--text)}
+/* `.nav-links a` (0,1,1) outranks `.btn--primary` (0,1,0), which was painting
+   the résumé CTA muted-grey on cyan — 1.44:1. Match specificity to win it back. */
+.nav-links a.btn--primary{color:var(--accent-ink)}
+.nav-links a.btn--primary:hover{color:var(--accent-ink)}
+.nav-links a.btn--ghost:hover{color:var(--text)}
+.nav-toggle{display:none;width:42px;height:42px;border:1px solid var(--line-2);border-radius:var(--r-md);
+            align-items:center;justify-content:center}
+.progress{position:fixed;inset:0 auto auto 0;height:2px;width:0;z-index:90;background:var(--accent)}
+
+/* ===================== HERO =========================================== */
+.hero{padding:calc(66px + var(--s9)) 0 var(--s8);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:70%;pointer-events:none;
+              background:radial-gradient(60% 60% at 22% 0%,rgba(52,227,255,.09),transparent 70%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:var(--s8);align-items:start}
+.hero .display{margin-top:var(--s5)}
+.hero .display span{background:var(--brand-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-role{font-family:'Space Grotesk',sans-serif;font-size:var(--f-h3);font-weight:500;color:var(--text);
+           margin-top:var(--s4);letter-spacing:-.01em}
+.hero-lede{max-width:52ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s6)}
+
+/* fact table — the part a recruiter reads in 8 seconds */
+.facts{margin-top:var(--s7);border-top:1px solid var(--line)}
+.fact{display:grid;grid-template-columns:132px 1fr;gap:var(--s4);padding:11px 0;border-bottom:1px solid var(--line);
+      font-size:var(--f-sm)}
+.fact dt{color:var(--text-3);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
+         text-transform:uppercase;padding-top:3px}
+.fact dd{margin:0;color:var(--text)}
+.fact dd em{font-style:normal;color:var(--text-3)}
+
+/* reel panel — video is CONTAINED evidence, not wallpaper */
+.reel{position:sticky;top:90px;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--ink-2)}
+.reel-video{position:relative;aspect-ratio:16/10;background:#000}
+.reel-video video,.reel-video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel-video video{opacity:0;transition:opacity 400ms var(--ease)}
+.reel-video.playing video{opacity:1}
+.reel-tag{position:absolute;left:var(--s3);top:var(--s3);z-index:2;background:rgba(8,9,12,.72);
+          backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:var(--r-sm);padding:5px 9px}
+.reel-meta{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);padding:var(--s4);
+           border-top:1px solid var(--line)}
+.reel-cycle{display:flex;gap:2px}
+/* 22x3px was the visible mark, but the *target* has to clear 44px. Pad the
+   button out and draw the mark with ::before. */
+.reel-cycle button{position:relative;width:30px;height:44px;background:none;display:grid;place-items:center}
+.reel-cycle button::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--line-2);
+  transition:background var(--t-fast) var(--ease)}
+.reel-cycle button[aria-current="true"]::before{background:var(--accent)}
+.reel-cycle button:hover::before{background:var(--text-2)}
+
+/* ===================== LOGO STRIP ===================================== */
+.strip{border-block:1px solid var(--line);background:var(--ink-1)}
+.strip-in{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s6);padding-block:var(--s5)}
+.strip-in span{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500;color:var(--text-2)}
+.strip-in .mono{color:var(--text-3)}
+
+/* ===================== CASE STUDIES =================================== */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:var(--s7);align-items:start;
+      padding-block:var(--s8);border-top:1px solid var(--line)}
+.case:nth-child(even) .case-media{order:2}
+.case-media{position:sticky;top:90px}
+.player{position:relative;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
+        background:#000}
+.player img,.player video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.player video{z-index:1;opacity:0;transition:opacity 300ms var(--ease)}
+.player.playing video{opacity:1}
+.player.playing .play,.player.playing .player-cap{opacity:0;pointer-events:none}
+.play{position:absolute;inset:auto auto var(--s4) var(--s4);z-index:3;display:inline-flex;align-items:center;gap:var(--s2);
+      padding:9px 15px 9px 11px;border-radius:var(--r-pill);background:rgba(8,9,12,.78);backdrop-filter:blur(8px);
+      border:1px solid var(--line-2);font-size:12.5px;font-weight:600;transition:opacity var(--t-fast),background var(--t-fast)}
+.play:hover{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.play svg{width:11px;height:11px}
+.player-cap{position:absolute;inset:var(--s3) var(--s3) auto auto;z-index:3;background:rgba(8,9,12,.7);
+            backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:var(--r-sm);padding:5px 9px;
+            transition:opacity var(--t-fast)}
+.case-note{margin-top:var(--s3);color:var(--text-3);font-size:12.5px}
+
+.case-index{display:flex;align-items:baseline;gap:var(--s3);color:var(--text-3)}
+.case-index b{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--accent);font-weight:600;letter-spacing:.08em}
+.case h3{font-size:clamp(26px,3vw,38px);margin-top:var(--s2)}
+.case-org{margin-top:var(--s3);color:var(--text-2);font-size:var(--f-sm)}
+.case-org b{color:var(--text);font-weight:600}
+
+.pai{margin-top:var(--s5);display:grid;gap:var(--s4)}
+.pai section{border-left:2px solid var(--line);padding-left:var(--s4)}
+.pai section.is-impact{border-left-color:var(--accent)}
+.pai h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+        color:var(--text-3);font-weight:500;margin-bottom:6px}
+.pai p{color:var(--text-2);font-size:var(--f-sm)}
+.pai ul{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+.pai li{position:relative;padding-left:18px;color:var(--text-2);font-size:var(--f-sm)}
+.pai li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1.5px;background:var(--accent)}
+.pai li b{color:var(--text);font-weight:600}
+
+/* Progressive disclosure for the shorter case studies. The metrics and the
+   one-line summary stay visible — those carry the argument for a skimmer.
+   The problem/approach/impact prose is a click away rather than deleted, so
+   the page reads at a third the length without losing any of the depth. */
+.case-more{margin-top:var(--s5);border-top:1px solid var(--line)}
+.case-more summary{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+  padding:var(--s4) 0;cursor:pointer;list-style:none;font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);
+  transition:color var(--t-fast) var(--ease)}
+.case-more summary::-webkit-details-marker{display:none}
+.case-more summary:hover{color:var(--accent)}
+.case-more summary::after{content:"+";font-size:16px;flex:none;transition:transform var(--t-fast) var(--ease)}
+.case-more[open] summary{color:var(--accent)}
+.case-more[open] summary::after{transform:rotate(45deg)}
+.case-more[open] summary .closed-label,.case-more:not([open]) summary .open-label{display:none}
+.case-more .pai{margin-top:0;padding-bottom:var(--s5)}
+
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin-top:var(--s5)}
+.metric{border:1px solid var(--line);border-radius:var(--r-md);padding:var(--s4) var(--s3);text-align:center;
+        background:var(--ink-2)}
+.metric b{display:block;font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,2.2vw,26px);font-weight:700;
+          letter-spacing:-.02em;color:var(--text)}
+.metric span{display:block;margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+             text-transform:uppercase;color:var(--text-3);line-height:1.4}
+.case-foot{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-top:var(--s5);
+           padding-top:var(--s4);border-top:1px solid var(--line)}
+.nda{display:inline-flex;align-items:center;gap:var(--s2);font-size:12.5px;color:var(--text-3)}
+.nda::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--deep)}
+
+/* ===================== ARCHIVE ======================================== */
+.filters{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s5)}
+.filters button{padding:7px 14px;border-radius:var(--r-pill);border:1px solid var(--line);font-size:13px;
+                color:var(--text-2);transition:all var(--t-fast) var(--ease)}
+.filters button:hover{border-color:var(--line-2);color:var(--text)}
+.filters button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:600}
+.archive{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s5)}
+.tile{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--ink-2);
+      transition:border-color var(--t-fast) var(--ease),transform var(--t-fast) var(--ease)}
+.tile:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.tile[hidden]{display:none}
+.tile-media{position:relative;aspect-ratio:16/9;background:#000}
+.tile-media img,.tile-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile-media video{z-index:1;opacity:0;transition:opacity 300ms var(--ease)}
+.tile:hover .tile-media video{opacity:1}
+.tile-body{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3);padding:var(--s3) var(--s4)}
+.tile-body h4{font-size:14.5px}
+/* Only some tiles have footage. Say which, instead of promising all of them. */
+.tile-clip{position:absolute;inset:var(--s2) var(--s2) auto auto;z-index:2;background:rgba(8,9,12,.72);
+  backdrop-filter:blur(6px);border:1px solid rgba(52,227,255,.35);color:var(--accent);
+  border-radius:var(--r-sm);padding:3px 7px;transition:opacity var(--t-fast) var(--ease)}
+.tile:hover .tile-clip{opacity:0}
+
+/* ===================== STATS ========================================== */
+.stats{display:grid;grid-template-columns:repeat(6,1fr)}
+.stat{padding:var(--s7) var(--s3);text-align:center;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:700;
+        letter-spacing:-.03em;line-height:1;color:var(--accent)}
+.stat span{display:block;margin-top:var(--s3);font-size:12.5px;color:var(--text-2);line-height:1.4;text-wrap:balance}
+
+/* ===================== TIMELINE ======================================= */
+.timeline{margin-top:var(--s7);max-width:860px;position:relative;padding-left:var(--s6)}
+.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.job{position:relative;padding-bottom:var(--s7)}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:calc(var(--s6) * -1);top:7px;width:11px;height:11px;border-radius:50%;
+             background:var(--ink-0);border:2px solid var(--line-2)}
+.job.is-now::before{border-color:var(--accent);background:var(--accent)}
+.job-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s3);justify-content:space-between}
+.job-org{color:var(--text-2);font-size:var(--f-sm);margin-top:2px}
+.job ul{margin:var(--s3) 0 0;padding-left:0;list-style:none;display:grid;gap:6px}
+.job li{position:relative;padding-left:18px;color:var(--text-2);font-size:var(--f-sm)}
+.job li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:1.5px;background:var(--line-2)}
+.job li b{color:var(--text);font-weight:600}
+
+/* ===================== TWO-COL LISTS ================================== */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:var(--s7);margin-top:var(--s7)}
+.rowlist{display:grid;gap:var(--s3)}
+.row{display:grid;grid-template-columns:1fr auto;gap:var(--s4);align-items:baseline;
+     padding-bottom:var(--s3);border-bottom:1px solid var(--line)}
+.row p{color:var(--text-2);font-size:13px;margin-top:2px}
+
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s7)}
+.skillcat h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+             color:var(--text-3);font-weight:500;margin-bottom:var(--s3)}
+
+/* ===================== FAQ ============================================ */
+.faq{margin-top:var(--s7);border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);padding:var(--s5) 0;
+             cursor:pointer;list-style:none;font-family:'Space Grotesk',sans-serif;font-size:var(--f-h4);font-weight:500;
+             transition:color var(--t-fast)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--accent)}
+.faq summary::after{content:"+";font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--text-3);flex:none;
+                    transition:transform var(--t-fast) var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg);color:var(--accent)}
+.faq .answer{padding:0 0 var(--s5);color:var(--text-2);max-width:74ch;font-size:var(--f-sm)}
+
+/* ===================== CONTACT / FOOTER =============================== */
+.contact{background:var(--ink-1);border-top:1px solid var(--line);position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:auto -10% -60% 20%;height:100%;pointer-events:none;
+                 background:radial-gradient(50% 50% at 50% 50%,rgba(52,227,255,.08),transparent 70%)}
+.contact-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:var(--s8);align-items:start}
+.contact-links{display:grid;gap:var(--s3);margin-top:var(--s6)}
+.clink{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);padding:var(--s4) var(--s5);
+       border:1px solid var(--line);border-radius:var(--r-md);background:var(--ink-2);
+       transition:border-color var(--t-fast) var(--ease),background var(--t-fast) var(--ease),transform var(--t-fast) var(--ease)}
+.clink:hover{border-color:var(--line-2);background:var(--ink-3);transform:translateX(3px)}
+.clink span{font-size:var(--f-sm)}
+.clink svg{width:15px;height:15px;color:var(--text-3);flex:none}
+.foot{border-top:1px solid var(--line);padding-block:var(--s5);display:flex;flex-wrap:wrap;gap:var(--s4);
+      justify-content:space-between;align-items:center}
+.foot .mono{letter-spacing:.06em;text-transform:none}
+
+/* ===================== CINEMA (scroll-driven hero) ====================
+   A tall block whose stage is sticky. Scroll progress 0..1 drives three
+   things: which scene is on screen, the scrubbed video frame, and the veil.
+   No library. No scroll hijacking. Sticky does the pinning; JS only reads
+   progress and writes opacity/currentTime. Without JS you get scene 0 on a
+   still poster — which is a complete, usable hero.
+   ==================================================================== */
+.cinema{position:relative;height:280vh}
+.cinema-stage{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center}
+.cinema-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.cinema-bg--still{z-index:0}
+/* The scrim exists to make text readable, not to dim the footage. A flat
+   62-94% wash over the whole frame crushed a well-exposed YAVG~120 capture
+   down to ~35 — it read as "bad video" when the video was fine. All the text
+   is left-aligned, so weight the darkness left and let the right side of the
+   terrain stay bright. Top band keeps the nav legible; bottom eases into the
+   next section. */
+.cinema-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(110% 80% at 14% 10%,rgba(52,227,255,.13),transparent 60%),
+    linear-gradient(97deg,rgba(8,9,12,.78) 0%,rgba(8,9,12,.66) 30%,
+                    rgba(8,9,12,.48) 52%,rgba(8,9,12,.20) 75%,rgba(8,9,12,.22) 100%),
+    linear-gradient(180deg,rgba(8,9,12,.45) 0%,rgba(8,9,12,.05) 18%,
+                    rgba(8,9,12,.05) 66%,rgba(8,9,12,.84) 100%)}
+.cinema-noise{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E")}
+
+.cinema-layer{position:absolute;inset:0;z-index:3;display:grid;align-content:center;
+  width:100%;opacity:0;pointer-events:none;
+  transition:opacity 240ms linear,transform 240ms var(--ease)}
+/* Scene 0 is the first-paint and no-JS default, so the hero is never blank
+   before the scroll engine runs. `.scripted` (added by JS, desktop only) then
+   takes over with enough specificity to hide it again. */
+.cinema-layer[data-scene="0"]{opacity:1;pointer-events:auto}
+.cinema.scripted .cinema-layer:not(.is-on){opacity:0;pointer-events:none}
+.cinema.scripted .cinema-layer.is-on{opacity:1;pointer-events:auto}
+.cinema-bg--still{transition:opacity 500ms var(--ease)}
+
+.cinema-inner{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--s5);width:100%}
+/* Local halo. The scrim handles the average case; this covers the moment a
+   specular highlight drifts under a word. Costs nothing on flat backgrounds. */
+.cinema-layer :is(h1,p,span,div,b){text-shadow:0 1px 20px rgba(8,9,12,.75),0 1px 3px rgba(8,9,12,.55)}
+.cinema-layer .display span{text-shadow:none}
+.cinema .display{margin-top:var(--s4)}
+.cinema .display span{background:var(--brand-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cinema-role{font-family:'Space Grotesk',sans-serif;font-size:var(--f-h2);font-weight:500;
+  color:var(--text);margin-top:var(--s4);letter-spacing:-.015em}
+.cinema-lede{max-width:50ch;margin-top:var(--s4)}
+/* --text-2 is tuned for flat dark surfaces. Over footage it drops to ~3.2:1
+   against the brightest props, so the hero gets its own lighter muted tone. */
+.cinema-layer .lede{color:#CFD6E4}
+.cinema-cta{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s6)}
+
+/* scene 1 — the single-sentence thesis, set large */
+.thesis{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,4.2vw,54px);font-weight:600;
+  letter-spacing:-.03em;line-height:1.1;max-width:19ch;text-wrap:balance}
+.thesis em{font-style:normal;background:var(--brand-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* scene 2 — proof, the numbers a recruiter screenshots */
+/* 2x2, not 1x4. Keeping every word left of ~50% of the frame is what lets the
+   scrim above stay light enough to actually show the terrain. */
+.proof{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s6) var(--s5);max-width:600px}
+.proof-item b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(30px,4vw,52px);line-height:1;color:var(--accent)}
+/* --text, not --text-2: these labels run out to ~76% of the frame where the
+   scrim is lightest, and the muted grey drops under 4.5:1 over bright terrain. */
+.proof-item span{display:block;margin-top:var(--s3);font-size:var(--f-sm);color:var(--text);line-height:1.4}
+
+/* scroll affordance */
+.cinema-hint{position:absolute;left:50%;bottom:var(--s6);transform:translateX(-50%);z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:var(--s2);pointer-events:none;
+  transition:opacity var(--t-fast) var(--ease)}
+.cinema-hint i{display:block;width:1px;height:34px;background:linear-gradient(180deg,transparent,var(--accent));
+  animation:drop 1.9s var(--ease) infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}
+                51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* chapter counter on the stage edge */
+.cinema-count{position:absolute;right:var(--s5);bottom:var(--s6);z-index:4;display:flex;gap:6px}
+.cinema-count i{width:26px;height:2px;border-radius:2px;background:var(--line-2);transition:background var(--t-fast)}
+.cinema-count i.on{background:var(--accent)}
+
+/* ===================== SCROLL SPY RAIL ================================ */
+.rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:70;
+      display:flex;flex-direction:column;gap:2px;opacity:0;transition:opacity var(--t-slow) var(--ease)}
+.rail.on{opacity:1}
+.rail a{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:6px 0;color:var(--text-3)}
+.rail span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  opacity:0;transform:translateX(6px);transition:opacity var(--t-fast) var(--ease),transform var(--t-fast) var(--ease)}
+.rail i{width:22px;height:2px;border-radius:2px;background:var(--line-2);flex:none;
+  transition:background var(--t-fast) var(--ease),width var(--t-fast) var(--ease)}
+.rail a:hover span,.rail a[aria-current="true"] span{opacity:1;transform:none}
+.rail a:hover i{background:var(--text-2)}
+.rail a[aria-current="true"] i{background:var(--accent);width:32px}
+.rail a[aria-current="true"]{color:var(--accent)}
+
+/* ===================== MOBILE ACTION BAR ============================== */
+/* The conversion path, always one thumb-reach away. Desktop keeps it in nav. */
+.actionbar{display:none;position:fixed;inset:auto 0 0;z-index:75;gap:var(--s2);padding:10px var(--s4)
+  calc(10px + env(safe-area-inset-bottom));background:rgba(8,9,12,.92);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line)}
+.actionbar .btn{flex:1;justify-content:center;min-height:46px}
+
+/* ===================== RESPONSIVE ===================================== */
+@media (max-width:1000px){
+  .hero-grid,.case,.contact-grid,.duo{grid-template-columns:1fr;gap:var(--s6)}
+  .case:nth-child(even) .case-media{order:0}
+  .reel,.case-media{position:static}
+  .archive,.skills{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat:nth-child(3n){border-right:0}
+  .stat:nth-child(-n+3){border-bottom:1px solid var(--line)}
+  .rail{display:none}
+  .proof{grid-template-columns:repeat(2,1fr);gap:var(--s5) var(--s4)}
+}
+
+/* Below 900px the cinema stops pinning and becomes three ordinary blocks.
+   Scroll-scrubbing video on touch is jank; a plain looping clip is better
+   evidence than a stuttering one. */
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .cinema{height:auto}
+  .cinema-stage{position:static;height:auto;display:block;padding-block:calc(66px + var(--s7)) var(--s8)}
+  .cinema-bg{position:absolute;inset:0 0 auto;height:min(78vh,620px)}
+  .cinema-veil{background:linear-gradient(180deg,rgba(8,9,12,.72) 0%,rgba(8,9,12,.90) 55%,var(--ink-0) 100%)}
+  .cinema-layer{position:static;opacity:1;pointer-events:auto;display:block;transform:none}
+  .cinema-layer + .cinema-layer{margin-top:var(--s8)}
+  .cinema-hint,.cinema-count{display:none}
+}
+@media (max-width:680px){
+  :root{--s9:var(--s8)}
+  .actionbar{display:flex}
+  body{padding-bottom:74px}
+  .proof{grid-template-columns:repeat(2,1fr)}
+  .thesis{max-width:none}
+  .nav-links{position:fixed;inset:66px 0 auto;flex-direction:column;align-items:stretch;gap:0;
+             background:rgba(8,9,12,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+             padding:var(--s3) var(--s5) var(--s5);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:var(--s3) 0;border-bottom:1px solid var(--line);font-size:15px}
+  .nav-links .btn{margin-top:var(--s4);justify-content:center}
+  .nav-toggle{display:inline-flex}
+  .archive,.skills{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat:nth-child(2n){border-right:0}
+  .fact{grid-template-columns:1fr;gap:2px;padding:10px 0}
+  .metrics{grid-template-columns:1fr}
+  .timeline{padding-left:var(--s5)}
+  .job::before{left:calc(var(--s5) * -1)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ========================= SCROLL SPY RAIL ========================= -->
+<nav class="rail" id="rail" aria-label="Section navigation">
+  <a href="#dossier"><span>Intro</span><i></i></a>
+  <a href="#work"><span>Work</span><i></i></a>
+  <a href="#archive"><span>Archive</span><i></i></a>
+  <a href="#experience"><span>Experience</span><i></i></a>
+  <a href="#contact"><span>Contact</span><i></i></a>
+</nav>
+
+<!-- ========================= NAV ========================= -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><b>A</b><span>Abhilash Badgujar<small>Gameplay Engineer</small></span></a>
+    <nav class="nav-links" id="menu">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn--primary" href="Abhilash-Badgujar-Resume.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11M7 10l5 5 5-5M5 21h14"/></svg>Résumé
+      </a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:19px;height:19px"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ========================= CINEMA (scroll-driven hero) ========================= -->
+<div class="cinema" id="cinema">
+  <div class="cinema-stage">
+    <img class="cinema-bg cinema-bg--still" id="cinemaStill" src="showreel/_assets/hero-bodycam.jpg" alt="" fetchpriority="high" />
+    <video class="cinema-bg" id="cinemaVideo" muted playsinline preload="none" aria-hidden="true"
+           poster="showreel/_assets/hero-bodycam.jpg"></video>
+    <div class="cinema-veil"></div>
+    <div class="cinema-noise" aria-hidden="true"></div>
+
+    <!-- Scene 0 — identity + the two things a recruiter came for -->
+    <div class="cinema-layer" data-scene="0">
+      <div class="cinema-inner">
+        <span class="status"><i></i>Available — senior / lead roles &amp; selective contract work</span>
+        <h1 class="display">Abhilash<br /><span>Badgujar</span></h1>
+        <p class="cinema-role">Senior Gameplay Engineer &amp; Technical Lead</p>
+        <div class="cinema-cta">
+        <a class="btn btn--primary" href="mailto:abhilashbadgujar9@gmail.com?subject=Role%20%2F%20project%20enquiry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          Start a conversation
+        </a>
+        <a class="btn btn--ghost" href="#work">See the work</a>
+        <a class="btn btn--ghost" href="Abhilash-Badgujar-Resume.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11M7 10l5 5 5-5M5 21h14"/></svg>
+          Résumé (PDF)
+        </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 1 — the thesis, one sentence, set large -->
+    <div class="cinema-layer" data-scene="1">
+      <div class="cinema-inner">
+        <div class="eyebrow mono">The work</div>
+        <p class="thesis">I build the systems players never see — <em>squad AI, netcode,
+          procedural worlds</em> and the tools that ship them.</p>
+        <p class="lede" style="max-width:44ch">Seven years in Unreal Engine 4/5 and Unity,
+          across PC, PlayStation 5, VR and mobile.</p>
+      </div>
+    </div>
+
+    <!-- Scene 2 — proof. The numbers, before any prose asks for patience. -->
+    <div class="cinema-layer" data-scene="2">
+      <div class="cinema-inner">
+        <div class="eyebrow mono">Receipts</div>
+        <div class="proof">
+          <div class="proof-item"><b>15,000</b><span>playable golf courses generated from real geospatial data</span></div>
+          <div class="proof-item"><b>60 fps</b><span>with 5–10M vegetation instances per level</span></div>
+          <div class="proof-item"><b>16</b><span>players, server-authoritative, with client prediction</span></div>
+          <div class="proof-item"><b>60→5 min</b><span>per-course setup after the tooling landed</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cinema-hint" id="cinemaHint" aria-hidden="true"><span class="mono">Scroll</span><i></i></div>
+    <div class="cinema-count" id="cinemaCount" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+  </div>
+</div>
+
+<!-- ========================= DOSSIER =========================
+     Everything the cinema deliberately withheld: the scannable facts and the
+     clip switcher. First native-scroll block, so skimmers land here fast. -->
+<section class="band dossier" id="dossier" style="padding-block:var(--s8)">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow mono">The short version</div>
+      <dl class="facts" style="margin-top:var(--s5)">
+        <div class="fact"><dt>Experience</dt><dd>7+ years shipping games &amp; tools · led a 5-engineer team across 4 concurrent projects</dd></div>
+        <div class="fact"><dt>Engines</dt><dd>Unreal Engine 4/5 <em>(primary, C++)</em> · Unity <em>(C#)</em></dd></div>
+        <div class="fact"><dt>Depth in</dt><dd>Gameplay AI · multiplayer netcode · procedural generation · editor tooling</dd></div>
+        <div class="fact"><dt>Shipped on</dt><dd>PC · PlayStation 5 <em>(commercially released title)</em> · VR · Mobile</dd></div>
+        <div class="fact"><dt>Based in</dt><dd>New Delhi, India <em>(UTC+5:30)</em> — remote worldwide, open to relocation</dd></div>
+        <div class="fact"><dt>Education</dt><dd>MSc Game Development (Programming), Kingston University UK — PlayStation First Partner Programme</dd></div>
+        <div class="fact"><dt>Languages</dt><dd>English <em>(fluent)</em> · Hindi <em>(fluent)</em></dd></div>
+      </dl>
+    </div>
+
+    <!-- Video: contained, captioned, one panel. Not the page. -->
+    <aside class="reel" aria-label="Showreel">
+      <div class="reel-video" id="reelVideo">
+        <img id="reelPoster" src="showreel/_assets/e6.jpg" alt="" />
+        <video id="reelPlayer" src="showreel/_assets/loop-e6.mp4" muted loop playsinline preload="none"></video>
+        <span class="reel-tag mono">Live footage</span>
+      </div>
+      <div class="reel-meta">
+        <div>
+          <div class="h4" id="reelTitle">E6 APEX</div>
+          <div class="mono" id="reelSub" style="letter-spacing:.08em;text-transform:none;margin-top:3px">Procedural terrain pipeline · UE5</div>
+        </div>
+        <div class="reel-cycle" id="reelCycle" role="group" aria-label="Choose clip"></div>
+      </div>
+      <div style="padding:var(--s4);border-top:1px solid var(--line)">
+        <p style="color:var(--text-2);font-size:13px">Five case studies below — each with the problem, the approach I
+          took, and what it measurably changed. Footage is real in-engine capture, not marketing renders.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ========================= PROOF STRIP ========================= -->
+<div class="strip">
+  <div class="wrap strip-in">
+    <span class="mono">Built for &amp; with</span>
+    <span>TruGolf</span><span>Unakin.ai</span><span>Gold Creek VR</span><span>U24 Solutions</span>
+    <span>EWAR Games</span><span>Hereafter Studios</span><span>Unity Technologies</span>
+  </div>
+</div>
+
+<!-- ========================= CASE STUDIES ========================= -->
+<section class="band band--alt" id="work">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow mono">Selected work</div>
+      <h2 class="h1">Five builds, with the receipts.</h2>
+      <p class="lede">Each one: what was broken, what I built, and what changed. Press play if you want to see it
+        move — the words carry the argument either way.</p>
+    </div>
+
+    <!-- ---- 01 E6 APEX ---- -->
+    <article class="case" data-reveal>
+      <div class="case-media">
+        <div class="player" data-player>
+          <img src="showreel/_assets/e6.jpg" alt="E6 APEX procedurally generated golf course in Unreal Engine 5" loading="lazy" />
+          <video src="showreel/_assets/loop-e6.mp4" muted loop playsinline preload="none"></video>
+          <span class="player-cap mono">In-engine · UE5</span>
+          <button class="play" data-play><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>Play clip</button>
+        </div>
+        <p class="case-note">Live commercial product — TruGolf E6 APEX.</p>
+      </div>
+      <div>
+        <div class="case-index"><b>01</b><span class="mono">Procedural · Unreal Engine 5</span></div>
+        <h3>E6 APEX</h3>
+        <p class="case-org"><b>Team of Keys</b> for <b>TruGolf</b> · 2022 – present · Senior Game Programmer &amp; Team Lead</p>
+        <p class="lede" style="font-size:var(--f-body);max-width:46ch">A pipeline that turns real-world geospatial
+          data into roughly 15,000 playable golf courses.</p>
+
+        <div class="pai">
+          <section>
+            <h4>The problem</h4>
+            <p>Hand-authoring golf courses doesn't scale. TruGolf needed thousands of accurate, playable courses
+              built from real terrain data — and every one of them had to load fast and hold 60 fps on consumer
+              simulator hardware.</p>
+          </section>
+          <section>
+            <h4>What I built</h4>
+            <p>An automated UE5 course-creation pipeline: a Cesium + Unreal path that crops, stitches and streams
+              large geospatial datasets onto custom landscapes (working around dataset-size and landscape-import
+              limits), procedural spawning of pathways, water bodies and boundaries, and a custom foliage system.
+              Then a C++ Course Setup Tool automating directory creation, Runtime Virtual Textures, material
+              instance cloning and grass-type templates, plus top-down batch snapshot rendering using
+              <code style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--text)">GetViewFrustumBounds()</code>
+              and spline intersections to produce high-precision alpha masks and course maps.</p>
+          </section>
+          <section class="is-impact">
+            <h4>What changed</h4>
+            <ul>
+              <li><b>~15,000</b> unique courses generated from heightmap and geospatial data</li>
+              <li><b>60 fps</b> held with 5–10M vegetation instances per course via instancing, culling and LOD work</li>
+              <li>Course generation cut from <b>60 minutes to 5–10 minutes</b></li>
+              <li>Load times reduced <b>~40%</b> through asset, scene and runtime optimisation</li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><b>15,000</b><span>Procedural courses</span></div>
+          <div class="metric"><b>60 fps</b><span>@ 5–10M instances</span></div>
+          <div class="metric"><b>−40%</b><span>Load time</span></div>
+        </div>
+
+        <div class="chips" style="margin-top:var(--s5)">
+          <span class="chip">Unreal Engine 5</span><span class="chip">C++</span><span class="chip">Cesium</span>
+          <span class="chip">Procedural gen</span><span class="chip">RVT</span><span class="chip">Editor tools</span>
+        </div>
+        <div class="case-foot">
+          <a class="btn btn--ghost" href="https://trugolf.com/pages/e6-by-trugolf" target="_blank" rel="noopener">
+            See the live product<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---- 02 Cradle of Sins ---- -->
+    <article class="case" data-reveal>
+      <div class="case-media">
+        <div class="player" data-player>
+          <img src="showreel/_assets/cradle.jpg" alt="Cradle of Sins networked PvP combat" loading="lazy" />
+          <video src="showreel/_assets/loop-cradle.mp4" muted loop playsinline preload="none"></video>
+          <span class="player-cap mono">In-engine · UE</span>
+          <button class="play" data-play><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>Play clip</button>
+        </div>
+        <p class="case-note">Public playtest build on Steam.</p>
+      </div>
+      <div>
+        <div class="case-index"><b>02</b><span class="mono">Multiplayer · Unreal Engine</span></div>
+        <h3>Cradle of Sins</h3>
+        <p class="case-org"><b>U24 Solutions</b> · PC / Steam · Multiplayer &amp; gameplay engineer</p>
+        <p class="lede" style="font-size:var(--f-body);max-width:46ch">Server-authoritative combat that still feels
+          instant in the player's hands.</p>
+
+        <div class="pai">
+          <section>
+            <h4>The problem</h4>
+            <p>Networked melee has to resolve on the server to stay cheat-proof, but any round-trip the player can
+              feel makes the combat read as broken. On top of that, the build was quietly losing framerate and
+              nobody knew why.</p>
+          </section>
+          <section>
+            <h4>What I built</h4>
+            <p>Server-authoritative combat and networked character systems — ability synchronisation, server-side
+              hit validation, an RPC layer and client-side prediction so input registers locally while the server
+              stays the source of truth. Then I profiled the framerate loss in Unreal Insights and traced it to a
+              multiplayer tick-rate regression.</p>
+          </section>
+          <section class="is-impact">
+            <h4>What changed</h4>
+            <ul>
+              <li><b>20–30% of the framerate recovered</b> once the tick-rate regression was diagnosed and fixed</li>
+              <li>Cheat-resistant authoritative combat with prediction, shipped to public playtest</li>
+              <li>Reusable replication layer — abilities, hit validation and RPCs — for the rest of the team</li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><b>+20–30%</b><span>FPS recovered</span></div>
+          <div class="metric"><b>Server</b><span>Authoritative combat</span></div>
+          <div class="metric"><b>Steam</b><span>Public playtest</span></div>
+        </div>
+
+        <div class="chips" style="margin-top:var(--s5)">
+          <span class="chip">Unreal Engine</span><span class="chip">C++</span><span class="chip">Replication</span>
+          <span class="chip">RPCs</span><span class="chip">Client prediction</span><span class="chip">Unreal Insights</span>
+        </div>
+        <div class="case-foot">
+          <a class="btn btn--ghost" href="https://store.steampowered.com/app/1037380/Cradle_of_Sins/" target="_blank" rel="noopener">
+            Steam page<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---- 03 Sawyer 2.0 ---- -->
+    <article class="case" data-reveal>
+      <div class="case-media">
+        <div class="player" data-player>
+          <img src="showreel/_assets/sawyer.jpg" alt="Sawyer 2.0 AI assistant inside the Unity Editor" loading="lazy" />
+          <video src="showreel/_assets/loop-sawyer.mp4" muted loop playsinline preload="none"></video>
+          <span class="player-cap mono">Editor capture · Unity</span>
+          <button class="play" data-play><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>Play clip</button>
+        </div>
+        <p class="case-note">Commercial AI tooling product — Unakin.ai.</p>
+      </div>
+      <div>
+        <div class="case-index"><b>03</b><span class="mono">AI tooling · Unity Editor</span></div>
+        <h3>Sawyer 2.0</h3>
+        <p class="case-org"><b>Unakin.ai</b> · Senior engineer — editor tooling &amp; AI</p>
+        <p class="lede" style="font-size:var(--f-body);max-width:46ch">An AI development assistant that lives inside
+          the Unity Editor and can actually touch the project.</p>
+
+        <details class="case-more">
+        <summary><span class="closed-label">Read the full breakdown</span><span class="open-label">Collapse</span></summary>
+        <div class="pai">
+          <section>
+            <h4>The problem</h4>
+            <p>Developers lose hours context-switching out of the engine — for docs, for boilerplate, for turning a
+              Figma frame into working UI. A chat window in a browser doesn't know anything about your project.</p>
+          </section>
+          <section>
+            <h4>What I built</h4>
+            <p>An AI coding and development assistant embedded in the Unity Editor in C#, Python and FastAPI: a UI
+              Toolkit frontend with dockable editor windows, custom diff views and RAG indexing services for
+              project-aware LLM interactions. Underneath, a Python MCP server and a C# command registry giving the
+              model real tool calls — semantic search, script management, Figma-to-Unity UI generation, and live
+              scene, GameObject, asset and UI modification.</p>
+          </section>
+          <section class="is-impact">
+            <h4>What changed</h4>
+            <ul>
+              <li>The assistant is <b>project-aware</b> — RAG indexing means answers reference your actual code</li>
+              <li><b>Real tool calls, not suggestions</b>: it edits scenes, assets and scripts through a typed command registry</li>
+              <li><b>Figma → Unity UI</b> generation removes the most mechanical part of UI work</li>
+              <li>Custom diff views keep a human in the loop on every change</li>
+            </ul>
+          </section>
+        </div>
+        </details>
+
+        <div class="metrics">
+          <div class="metric"><b>MCP</b><span>Tool-calling server</span></div>
+          <div class="metric"><b>RAG</b><span>Project-aware context</span></div>
+          <div class="metric"><b>Figma→UI</b><span>Generation</span></div>
+        </div>
+
+        <div class="chips" style="margin-top:var(--s5)">
+          <span class="chip">Unity</span><span class="chip">C#</span><span class="chip">UI Toolkit</span>
+          <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">LLM / RAG</span><span class="chip">MCP</span>
+        </div>
+        <div class="case-foot">
+          <a class="btn btn--ghost" href="https://www.unakin.ai/" target="_blank" rel="noopener">
+            unakin.ai<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---- 04 Bodycam ---- -->
+    <article class="case" data-reveal>
+      <div class="case-media">
+        <div class="player" data-player>
+          <img src="showreel/_assets/bodycam.jpg" alt="Bodycam tactical FPS squad AI encounter" loading="lazy" />
+          <video src="showreel/_assets/loop-bodycam.mp4" muted loop playsinline preload="none"></video>
+          <span class="player-cap mono">In-engine · UE5</span>
+          <button class="play" data-play><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>Play clip</button>
+        </div>
+        <p class="case-note">Client confidential — footage cleared for portfolio use.</p>
+      </div>
+      <div>
+        <div class="case-index"><b>04</b><span class="mono">AI &amp; camera systems · Unreal Engine 5</span></div>
+        <h3>Bodycam Tactical FPS</h3>
+        <p class="case-org"><b>Confidential client</b> · Gameplay &amp; AI engineer</p>
+        <p class="lede" style="font-size:var(--f-body);max-width:46ch">Squad AI that behaves like a squad, and a
+          camera that behaves like a body.</p>
+
+        <details class="case-more">
+        <summary><span class="closed-label">Read the full breakdown</span><span class="open-label">Collapse</span></summary>
+        <div class="pai">
+          <section>
+            <h4>The problem</h4>
+            <p>A tactical shooter fails the moment enemies read as scripted targets. It needs NPCs that
+              investigate, coordinate and escalate — and a first-person camera with enough physicality that players
+              believe they're carrying a weapon rather than floating behind one.</p>
+          </section>
+          <section>
+            <h4>What I built</h4>
+            <p>An NPC AI pipeline on Behavior Trees, EQS and AI Perception covering patrol, investigation, alert,
+              flanking, reinforcement and combat behaviours. Alongside it, bodycam-style camera and character
+              systems — procedural sway, lens distortion, light flares, ADS sway, procedural recoil curves and
+              replicated chamber states — plus procedural mission generation from randomised environment layouts,
+              enemy-placement graphs and dynamic objective seeding.</p>
+          </section>
+          <section class="is-impact">
+            <h4>What changed</h4>
+            <ul>
+              <li><b>Six coordinated behaviours</b> from one AI pipeline instead of per-encounter scripting</li>
+              <li>Missions <b>generate procedurally</b> — layouts, enemy placement and objectives are seeded, not authored</li>
+              <li>Weapon feel driven by <b>procedural recoil and sway</b>, with chamber state replicated for multiplayer</li>
+            </ul>
+          </section>
+        </div>
+        </details>
+
+        <div class="metrics">
+          <div class="metric"><b>BT · EQS</b><span>AI stack</span></div>
+          <div class="metric"><b>6</b><span>Squad behaviours</span></div>
+          <div class="metric"><b>Procedural</b><span>Mission generation</span></div>
+        </div>
+
+        <div class="chips" style="margin-top:var(--s5)">
+          <span class="chip">Unreal Engine 5</span><span class="chip">C++</span><span class="chip">Behavior Trees</span>
+          <span class="chip">EQS</span><span class="chip">AI Perception</span><span class="chip">Procedural missions</span>
+        </div>
+        <div class="case-foot">
+          <span class="nda">Under NDA — happy to walk through the architecture on a call</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---- 05 Say A Prayer ---- -->
+    <article class="case" data-reveal>
+      <div class="case-media">
+        <div class="player" data-player>
+          <img src="showreel/_assets/prayer.jpg" alt="Say A Prayer, a commercially released PlayStation title" loading="lazy" />
+          <video src="showreel/_assets/loop-prayer.mp4" muted loop playsinline preload="none"></video>
+          <span class="player-cap mono">In-engine · PS5</span>
+          <button class="play" data-play><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>Play clip</button>
+        </div>
+        <p class="case-note">Commercially released on the PlayStation Store.</p>
+      </div>
+      <div>
+        <div class="case-index"><b>05</b><span class="mono">Shipped · PlayStation</span></div>
+        <h3>Say A Prayer</h3>
+        <p class="case-org"><b>Gold Creek VR</b> · PlayStation · Gameplay engineer</p>
+        <p class="lede" style="font-size:var(--f-body);max-width:46ch">A commercially released PlayStation title —
+          console certification included.</p>
+
+        <details class="case-more">
+        <summary><span class="closed-label">Read the full breakdown</span><span class="open-label">Collapse</span></summary>
+        <div class="pai">
+          <section>
+            <h4>The problem</h4>
+            <p>Shipping on PlayStation means clearing Sony's certification bar: trophies must fire correctly,
+              progression must survive every save/quit path, and nothing can be "mostly working."</p>
+          </section>
+          <section>
+            <h4>What I built</h4>
+            <p>Progression systems, audiovisual reward triggers, Digital Scripture Card milestones and the
+              trophy-related gameplay functionality — then the unglamorous certification work of making all of it
+              deterministic.</p>
+          </section>
+          <section class="is-impact">
+            <h4>What changed</h4>
+            <ul>
+              <li><b>Released commercially on PlayStation</b> and through platform certification</li>
+              <li>Progression and reward systems that hold up under cert-level scrutiny</li>
+              <li>First-hand experience of console submission — not just PC-side development</li>
+            </ul>
+          </section>
+        </div>
+        </details>
+
+        <div class="metrics">
+          <div class="metric"><b>Shipped</b><span>PlayStation title</span></div>
+          <div class="metric"><b>Passed</b><span>Platform certification</span></div>
+          <div class="metric"><b>Trophies</b><span>Full gameplay loop</span></div>
+        </div>
+
+        <div class="chips" style="margin-top:var(--s5)">
+          <span class="chip">PlayStation</span><span class="chip">VR</span><span class="chip">Progression</span>
+          <span class="chip">Trophies</span><span class="chip">Certification</span>
+        </div>
+        <div class="case-foot">
+          <a class="btn btn--ghost" href="https://store.playstation.com/en-us/product/UP3511-PPSA19113_00-0214201306192011" target="_blank" rel="noopener">
+            PlayStation Store<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========================= STATS ========================= -->
+<section aria-label="By the numbers">
+  <div class="wrap" style="padding-inline:0">
+    <div class="stats">
+      <div class="stat"><b data-count="7" data-suffix="+">0</b><span>Years shipping games</span></div>
+      <div class="stat"><b data-count="15000" data-suffix="">0</b><span>Procedural courses generated</span></div>
+      <div class="stat"><b data-count="16" data-suffix="">0</b><span>Player authoritative multiplayer</span></div>
+      <div class="stat"><b data-count="60" data-suffix=" fps">0</b><span>At 5–10M instances</span></div>
+      <div class="stat"><b data-count="40" data-suffix="%">0</b><span>Faster load times</span></div>
+      <div class="stat"><b data-count="5" data-suffix="">0</b><span>Engineers led, 4 projects</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= ARCHIVE ========================= -->
+<section class="band" id="archive">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow mono">The archive</div>
+      <h2 class="h1">Range, across engines and platforms.</h2>
+      <p class="lede">Shipped work and prototypes outside the five case studies — combat, VR, simulation, AI tools
+        and mobile multiplayer. Tiles marked <span class="mono" style="color:var(--accent)">clip</span> preview on
+        hover.</p>
+      <div class="filters" id="filters">
+        <button aria-pressed="true" data-filter="all">All</button>
+        <button aria-pressed="false" data-filter="Unreal">Unreal</button>
+        <button aria-pressed="false" data-filter="Unity">Unity</button>
+        <button aria-pressed="false" data-filter="VR">VR</button>
+        <button aria-pressed="false" data-filter="AI">AI</button>
+        <button aria-pressed="false" data-filter="Mobile">Mobile</button>
+      </div>
+    </div>
+
+    <div class="archive">
+      <article class="tile" data-cats="Unreal">
+        <div class="tile-media"><img src="showreel/_assets/g-combat.jpg" alt="Combat system prototype" loading="lazy" />
+          <video src="showreel/_assets/loop-combat.mp4" muted loop playsinline preload="none"></video>
+          <span class="tile-clip mono">Clip</span></div>
+        <div class="tile-body"><h4 class="h4">Combat System</h4><span class="mono">UE5 · C++</span></div>
+      </article>
+      <article class="tile" data-cats="Unreal VR">
+        <div class="tile-media"><img src="showreel/_assets/g-vrgolf.jpg" alt="VR golf simulator" loading="lazy" />
+          <video src="showreel/_assets/loop-golf.mp4" muted loop playsinline preload="none"></video>
+          <span class="tile-clip mono">Clip</span></div>
+        <div class="tile-body"><h4 class="h4">VR Golf — Apex Sim</h4><span class="mono">UE5 · VR</span></div>
+      </article>
+      <article class="tile" data-cats="Unity VR">
+        <div class="tile-media"><img src="showreel/_assets/g-cricketvr.jpg" alt="Cricket VR" loading="lazy" /></div>
+        <div class="tile-body"><h4 class="h4">Cricket VR</h4><span class="mono">Unity · VR</span></div>
+      </article>
+      <article class="tile" data-cats="Unreal">
+        <div class="tile-media"><img src="showreel/_assets/g-flight.jpg" alt="Flight simulator" loading="lazy" /></div>
+        <div class="tile-body"><h4 class="h4">Flight Sim</h4><span class="mono">Unreal</span></div>
+      </article>
+      <article class="tile" data-cats="Unity VR">
+        <div class="tile-media"><img src="showreel/_assets/g-gym.jpg" alt="Gym simulator" loading="lazy" /></div>
+        <div class="tile-body"><h4 class="h4">Gym Simulator</h4><span class="mono">Unity · VR</span></div>
+      </article>
+      <article class="tile" data-cats="AI">
+        <div class="tile-media"><img src="showreel/_assets/g-aichat.jpg" alt="AI chatbot tool" loading="lazy" /></div>
+        <div class="tile-body"><h4 class="h4">AI Chatbot</h4><span class="mono">Python · LLM</span></div>
+      </article>
+      <article class="tile" data-cats="AI">
+        <div class="tile-media"><img src="showreel/_assets/g-decisionlab.jpg" alt="AI decision lab" loading="lazy" /></div>
+        <div class="tile-body"><h4 class="h4">AI Decision Lab</h4><span class="mono">AI · Tools</span></div>
+      </article>
+      <article class="tile" data-cats="Unity Mobile">
+        <div class="tile-media"><img src="showreel/_assets/g-pacman.jpg" alt="Pac-Man mobile build" loading="lazy" /></div>
+        <div class="tile-body"><h4 class="h4">Pac-Man</h4><span class="mono">Unity · Mobile</span></div>
+      </article>
+      <article class="tile" data-cats="Unity Mobile">
+        <div class="tile-media"><img src="showreel/_assets/g-ludo.jpg" alt="Ludo multiplayer mobile game" loading="lazy" /></div>
+        <div class="tile-body"><h4 class="h4">Ludo — Multiplayer</h4><span class="mono">Unity · Mobile</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= EXPERIENCE ========================= -->
+<!-- Was preceded by the "Hire me" engagement-models section; removed, so this
+     band takes over the alt shade to keep the light/dark rhythm alternating. -->
+<section class="band band--alt" id="experience">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow mono">Track record</div>
+      <h2 class="h1">Where I've built.</h2>
+    </div>
+
+    <div class="timeline">
+      <article class="job is-now" data-reveal>
+        <div class="job-top">
+          <div>
+            <h3 class="h3">Senior Game Programmer &amp; Team Lead</h3>
+            <p class="job-org">Team of Keys — Noida, India</p>
+          </div>
+          <span class="mono">May 2022 — present</span>
+        </div>
+        <ul>
+          <li>Directed a <b>five-person engineering team across four concurrent</b> Unreal Engine and Unity projects — architecture, task planning, code review, mentoring and delivery quality</li>
+          <li>Engineered a procedural biome system supporting <b>5–10M vegetation instances</b> per course at <b>60 fps</b> through instancing, culling and LOD optimisation</li>
+          <li>Built UE5 C++ editor tools for directory creation, map setup and Runtime Virtual Texture configuration</li>
+          <li>Cut automated golf-course generation from <b>60 minutes to 5–10 minutes</b> per course</li>
+          <li>Built and optimised server-authoritative multiplayer for <b>up to 16 players</b> — RPCs, hit validation, ability sync, client-side prediction</li>
+          <li>Reduced loading time by <b>~40%</b> through asset, scene and runtime optimisation</li>
+        </ul>
+      </article>
+
+      <article class="job" data-reveal>
+        <div class="job-top">
+          <div>
+            <h3 class="h3">Senior Game Developer</h3>
+            <p class="job-org">EWAR Games — Bangalore, India</p>
+          </div>
+          <span class="mono">Apr 2021 — Apr 2022</span>
+        </div>
+        <ul>
+          <li>Developed and maintained <b>five multiplayer mobile games</b> in Unity — Knife Hit, Sheep Fight, Ludo, Snakes &amp; Ladders, 2048</li>
+          <li>Integrated Kafka, GraphQL and WebSocket backend services into a Flutter app with embedded Unity gameplay</li>
+          <li>Optimised Unity ↔ Flutter communication across real-time multiplayer flows</li>
+          <li>Led development planning, technical workflows and reusable project architecture</li>
+        </ul>
+      </article>
+
+      <article class="job" data-reveal>
+        <div class="job-top">
+          <div>
+            <h3 class="h3">Unreal Engine Game Developer</h3>
+            <p class="job-org">Hereafter Studios — Mumbai, India</p>
+          </div>
+          <span class="mono">Aug 2020 — Apr 2021</span>
+        </div>
+        <ul>
+          <li>Built AWS Cognito authentication and Agora-based video calling for Unreal Engine applications</li>
+          <li>Built a runtime data-visualisation pipeline moving large datasets from Python into Unreal</li>
+          <li>Developed an Electron launcher for Windows and VR apps with version management via AWS S3</li>
+          <li>Created animated UI menus, settings systems and an Avatar Creation System</li>
+        </ul>
+      </article>
+
+      <article class="job" data-reveal>
+        <div class="job-top">
+          <div>
+            <h3 class="h3">Unity Game Developer</h3>
+            <p class="job-org">Dots &amp; Dashes Interactive — Bangalore, India</p>
+          </div>
+          <span class="mono">Nov 2018 — Jul 2020</span>
+        </div>
+        <ul>
+          <li>Built 2D and 3D Unity applications across multiplayer, AR, VR, education and hardware-integrated experiences</li>
+          <li>Integrated real-time multiplayer with SmartFoxServer</li>
+          <li>Built a VR 360-video pipeline and AR product-demonstration apps</li>
+          <li>Integrated Unity with hardware prototypes including an Arduino-powered claw machine, plus an Android OCR card-scanning prototype</li>
+        </ul>
+      </article>
+
+      <article class="job" data-reveal>
+        <div class="job-top">
+          <div>
+            <h3 class="h3">Unity Student Ambassador</h3>
+            <p class="job-org">Unity Technologies — Bangalore, India</p>
+          </div>
+          <span class="mono">Nov 2017 — Dec 2020</span>
+        </div>
+        <ul>
+          <li>Ran workshops and game jams for <b>60+</b> students and faculty</li>
+          <li>Supported allocation of 10+ Unity EDU Grant licences to student groups</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="duo">
+      <div data-reveal>
+        <h3 class="h2">Education</h3>
+        <div class="rowlist" style="margin-top:var(--s5)">
+          <div class="row">
+            <div>
+              <h4 class="h4">MSc Game Development (Programming)</h4>
+              <p>Kingston University, Kingston upon Thames, UK — PlayStation First Partner Programme</p>
+            </div>
+            <span class="mono">2024</span>
+          </div>
+          <div class="row">
+            <div>
+              <h4 class="h4">BCA — Games &amp; Mobile Application Development</h4>
+              <p>CMR University, Bangalore, India</p>
+            </div>
+            <span class="mono">2019</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <h3 class="h2">Recognition</h3>
+        <div class="rowlist" style="margin-top:var(--s5)">
+          <div class="row">
+            <div><h4 class="h4">Best Student Game of the Year — nominee</h4><p>India Game Developer Conference (IGDC)</p></div>
+            <span class="mono">2018</span>
+          </div>
+          <div class="row">
+            <div><h4 class="h4">Best Gameplay</h4><p>CMR University Game Jam</p></div>
+            <span class="mono">2017</span>
+          </div>
+          <div class="row">
+            <div><h4 class="h4">Unity Student Ambassador</h4><p>Unity Technologies</p></div>
+            <span class="mono">2017–20</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills">
+      <div class="skillcat card" data-reveal>
+        <h4>Engines &amp; languages</h4>
+        <div class="chips">
+          <span class="chip">Unreal Engine 4/5</span><span class="chip">Unity</span><span class="chip">C++</span>
+          <span class="chip">C#</span><span class="chip">Python</span><span class="chip">Blueprints</span>
+        </div>
+      </div>
+      <div class="skillcat card" data-reveal>
+        <h4>AI &amp; gameplay</h4>
+        <div class="chips">
+          <span class="chip">Behavior Trees</span><span class="chip">EQS</span><span class="chip">AI Perception</span>
+          <span class="chip">Crowd simulation</span><span class="chip">Character systems</span><span class="chip">Progression</span>
+        </div>
+      </div>
+      <div class="skillcat card" data-reveal>
+        <h4>Networking</h4>
+        <div class="chips">
+          <span class="chip">UE Replication</span><span class="chip">Server-authoritative combat</span>
+          <span class="chip">Client-side prediction</span><span class="chip">RPCs</span><span class="chip">Co-op sync</span>
+        </div>
+      </div>
+      <div class="skillcat card" data-reveal>
+        <h4>Procedural &amp; performance</h4>
+        <div class="chips">
+          <span class="chip">Procedural foliage</span><span class="chip">Cesium / geospatial</span><span class="chip">RVT</span>
+          <span class="chip">LOD &amp; culling</span><span class="chip">Unreal Insights</span>
+        </div>
+      </div>
+      <div class="skillcat card" data-reveal>
+        <h4>Tooling</h4>
+        <div class="chips">
+          <span class="chip">Unreal editor tools</span><span class="chip">C++ plugins</span><span class="chip">UI Toolkit</span>
+          <span class="chip">FastAPI</span><span class="chip">LLM / RAG</span><span class="chip">MCP</span>
+        </div>
+      </div>
+      <div class="skillcat card" data-reveal>
+        <h4>Platforms &amp; ops</h4>
+        <div class="chips">
+          <span class="chip">PC</span><span class="chip">PlayStation 5</span><span class="chip">VR</span>
+          <span class="chip">Android / iOS</span><span class="chip">AWS</span><span class="chip">Git · Perforce</span><span class="chip">Jira</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= FAQ ========================= -->
+<section class="band" id="faq">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="eyebrow mono">Before you email</div>
+      <h2 class="h1">The questions I actually get asked.</h2>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>Where are you based, and how much do we overlap?</summary>
+        <div class="answer">New Delhi, India — UTC+5:30. That's a full working-day overlap with Europe and the UK,
+          and a solid morning-to-early-afternoon overlap with US East Coast. I keep evenings open for US calls.
+          I've worked remotely with distributed teams for years; async written updates are the default, calls are
+          for the things that need them.</div>
+      </details>
+      <details>
+        <summary>Would you relocate?</summary>
+        <div class="answer">Yes, for the right role. I did my MSc at Kingston University in the UK, so I've lived
+          and studied abroad. Ask me about current visa and work-authorisation status for your country and I'll
+          give you the specifics rather than a vague answer.</div>
+      </details>
+      <details>
+        <summary>How quickly could you start?</summary>
+        <div class="answer">I'm currently in a senior role, so a full-time move needs a short runway. Contract and
+          fixed-scope work can usually start sooner. Tell me your target start date and I'll tell you honestly
+          whether it works — I won't string out a timeline I can't hit.</div>
+      </details>
+      <details>
+        <summary>Can I see code?</summary>
+        <div class="answer">Public work is on <a href="https://github.com/AbhilashBadgujar" target="_blank" rel="noopener"
+          style="color:var(--accent)">GitHub</a>. Client work — including the tactical FPS above — is under NDA, so
+          I can't hand over repositories. What I can do is walk through the architecture on a call, whiteboard how
+          the replication or AI layer was structured, and share sanitised samples where the client permits it.</div>
+      </details>
+      <details>
+        <summary>Do you work under NDA, and can you sign our paperwork?</summary>
+        <div class="answer">Yes. Several of the projects above are covered by NDAs I've kept. Send your agreement
+          with the brief and I'll review it before the scope call.</div>
+      </details>
+      <details>
+        <summary>What don't you do?</summary>
+        <div class="answer">I'm an engineer, not an artist or a game designer — I work best sitting next to good
+          ones. I don't take on art production, narrative design or full-game outsourcing. If your project needs a
+          system architected, optimised or rescued, that's the work I'm good at.</div>
+      </details>
+      <details>
+        <summary>How do you work with designers and artists?</summary>
+        <div class="answer">By making things tunable. Most of my editor-tooling work exists so designers can iterate
+          without a programmer in the loop — exposed parameters, in-editor previews, generation that takes minutes
+          instead of an afternoon. Tell me who's going to use the system daily and I'll build it around them.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= CONTACT ========================= -->
+<section class="band contact" id="contact">
+  <div class="wrap contact-grid">
+    <div data-reveal>
+      <div class="eyebrow mono">Get in touch</div>
+      <h2 class="h1">Building something worth playing?</h2>
+      <p class="lede">I'm open to senior and lead gameplay engineering roles, and take on a small number of contract
+        and fixed-scope projects alongside. If you need AI, netcode, procedural systems or tooling built by someone
+        who has shipped them — start here.</p>
+      <p class="lede" style="font-size:var(--f-sm);color:var(--text-3);margin-top:var(--s5)">
+        The more you tell me up front — engine, platform, deadline, what's actually stuck — the more useful my first
+        reply will be.</p>
+      <div class="hero-cta">
+        <a class="btn btn--primary" href="mailto:abhilashbadgujar9@gmail.com?subject=Role%20%2F%20project%20enquiry">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          abhilashbadgujar9@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-links" data-reveal>
+      <a class="clink" href="mailto:abhilashbadgujar9@gmail.com">
+        <span><b class="h4">Email</b><br /><span style="color:var(--text-3);font-size:13px">abhilashbadgujar9@gmail.com</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <a class="clink" href="https://www.linkedin.com/in/abhilash-b-82727bba/" target="_blank" rel="noopener">
+        <span><b class="h4">LinkedIn</b><br /><span style="color:var(--text-3);font-size:13px">Full history &amp; recommendations</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <a class="clink" href="https://github.com/AbhilashBadgujar" target="_blank" rel="noopener">
+        <span><b class="h4">GitHub</b><br /><span style="color:var(--text-3);font-size:13px">Public code &amp; experiments</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <a class="clink" href="Abhilash-Badgujar-Resume.pdf" download>
+        <span><b class="h4">Résumé</b><br /><span style="color:var(--text-3);font-size:13px">PDF · one page of hard facts</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11M7 10l5 5 5-5M5 21h14"/></svg>
+      </a>
+      <a class="clink" href="https://drive.google.com/drive/folders/18rGqbqYmDYWCweatAZwBY7Q2klkbWbWG?usp=sharing" target="_blank" rel="noopener">
+        <span><b class="h4">Full footage archive</b><br /><span style="color:var(--text-3);font-size:13px">Long-form captures on Google Drive</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="wrap foot">
+    <span class="mono">© 2026 Abhilash Badgujar — Senior Gameplay Engineer</span>
+    <span class="mono">New Delhi, India · UTC+5:30 · Remote worldwide</span>
+  </div>
+</section>
+
+</main>
+
+<!-- ========================= MOBILE ACTION BAR ========================= -->
+<div class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--ghost" href="Abhilash-Badgujar-Resume.pdf" download>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11M7 10l5 5 5-5M5 21h14"/></svg>Résumé
+  </a>
+  <a class="btn btn--primary" href="mailto:abhilashbadgujar9@gmail.com?subject=Role%20%2F%20project%20enquiry">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Get in touch
+  </a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Abhilash Badgujar",
+  "jobTitle":"Senior Gameplay Engineer & Technical Lead",
+  "email":"mailto:abhilashbadgujar9@gmail.com",
+  "address":{"@type":"PostalAddress","addressLocality":"New Delhi","addressCountry":"IN"},
+  "sameAs":["https://www.linkedin.com/in/abhilash-b-82727bba/","https://github.com/AbhilashBadgujar"],
+  "alumniOf":[
+    {"@type":"CollegeOrUniversity","name":"Kingston University"},
+    {"@type":"CollegeOrUniversity","name":"CMR University"}
+  ],
+  "knowsAbout":["Unreal Engine 5","Unity","C++","Gameplay AI","Behavior Trees","EQS","Multiplayer netcode","Procedural generation","Editor tooling"],
+  "worksFor":{"@type":"Organization","name":"Team of Keys"}
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- nav: stuck state, scroll progress, mobile menu ---------------- */
+  var nav = document.getElementById("nav"),
+      bar = document.getElementById("progress"),
+      menu = document.getElementById("menu"),
+      toggle = document.getElementById("navToggle");
+
+  function onScroll(){
+    nav.classList.toggle("stuck", window.scrollY > 24);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
+  }
+  onScroll();
+  window.addEventListener("scroll", onScroll, {passive:true});
+
+  toggle.addEventListener("click", function(){
+    var open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+  menu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded","false");
+    });
+  });
+
+  /* ---- scroll-spy rail ------------------------------------------------ */
+  /* Fires on section *entry* rather than nearest-midpoint: on a 15-screen
+     page the midpoint maths lies whenever two sections straddle the fold. */
+  var rail = document.getElementById("rail"),
+      railLinks = Array.prototype.slice.call(rail.querySelectorAll("a")),
+      spied = railLinks.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+
+  function markRail(){
+    var y = window.scrollY + window.innerHeight * .35, active = -1;
+    spied.forEach(function(sec, i){
+      if(sec && sec.offsetTop <= y) active = i;
+    });
+    railLinks.forEach(function(a, i){ a.setAttribute("aria-current", String(i === active)); });
+    rail.classList.toggle("on", active >= 0);
+  }
+
+  /* ---- cinema: sticky stage, scroll-driven scenes + scrubbed video ---- */
+  var cinema     = document.getElementById("cinema"),
+      cinemaVid  = document.getElementById("cinemaVideo"),
+      cinemaStill= document.getElementById("cinemaStill"),
+      hint       = document.getElementById("cinemaHint"),
+      countMarks = Array.prototype.slice.call(document.getElementById("cinemaCount").children),
+      scenes     = Array.prototype.slice.call(cinema.querySelectorAll(".cinema-layer")),
+      /* Same 900px breakpoint the CSS uses to unpin the stage. Keep in sync. */
+      cinemaLive = window.matchMedia("(min-width:901px)").matches && !reduce,
+      scrubReady = false, lastFrame = -1, ticking = false;
+
+  /* 2.8MB all-intra clip: desktop only, and only after first paint. Mobile and
+     reduced-motion never request it — they get the static poster instead. */
+  if(cinemaLive){
+    window.addEventListener("load", function(){
+      cinemaVid.src = "showreel/_assets/hero-scrub.mp4";
+      cinemaVid.load();
+      cinemaVid.addEventListener("loadedmetadata", function(){
+        scrubReady = isFinite(cinemaVid.duration) && cinemaVid.duration > 0;
+        cinemaStill.style.opacity = "0";
+        paintCinema();
+      }, {once:true});
+    });
+  }
+
+  /* Scene windows as [in, out) fractions of cinema progress. These must butt
+     up against each other — a gap between them reads as a flicker, not a beat,
+     because the 240ms CSS fade then runs out and straight back in. The
+     crossfade is the transition; the windows just hand off. */
+  var WINDOWS = [[0, .34], [.34, .68], [.68, 1.01]];
+
+  function paintCinema(){
+    var box = cinema.getBoundingClientRect(),
+        span = cinema.offsetHeight - window.innerHeight,
+        p = span > 0 ? Math.min(Math.max(-box.top / span, 0), 1) : 0;
+
+    scenes.forEach(function(el, i){
+      var w = WINDOWS[i], on = p >= w[0] && p < w[1];
+      el.classList.toggle("is-on", on);
+      countMarks[i].classList.toggle("on", on);
+      /* Slight lift as a scene leaves — motion that reports position. */
+      el.style.transform = on ? "none" : "translateY(" + (p < w[0] ? 18 : -18) + "px)";
+    });
+
+    if(hint) hint.style.opacity = p > .04 ? "0" : "1";
+
+    if(scrubReady){
+      var t = p * cinemaVid.duration;
+      /* Only seek on a real frame change; redundant seeks stall the decoder. */
+      if(Math.abs(t - lastFrame) > 1/30){
+        lastFrame = t;
+        try { cinemaVid.currentTime = t; } catch(err){}
+      }
+    }
+  }
+
+  function onFrame(){
+    ticking = false;
+    if(cinemaLive) paintCinema();
+    markRail();
+  }
+  function requestFrame(){
+    if(!ticking){ ticking = true; requestAnimationFrame(onFrame); }
+  }
+  window.addEventListener("scroll", requestFrame, {passive:true});
+  window.addEventListener("resize", function(){
+    cinemaLive = window.matchMedia("(min-width:901px)").matches && !reduce;
+    requestFrame();
+  }, {passive:true});
+  /* Static layout (mobile / reduced motion) shows every scene, no JS gating. */
+  if(cinemaLive) cinema.classList.add("scripted");
+  else scenes.forEach(function(el){ el.classList.add("is-on"); });
+  onFrame();
+
+  /* ---- reveal on scroll ---------------------------------------------- */
+  var revealables = document.querySelectorAll("[data-reveal]");
+  if(!reduce && "IntersectionObserver" in window){
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); revealObserver.unobserve(e.target); }
+      });
+    }, {threshold:.12, rootMargin:"0px 0px -6% 0px"});
+    revealables.forEach(function(el){ revealObserver.observe(el); });
+  } else {
+    revealables.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* ---- stat count-up --------------------------------------------------- */
+  function countUp(el){
+    var target = parseFloat(el.getAttribute("data-count")),
+        suffix = el.getAttribute("data-suffix") || "",
+        dur = 1300, start = performance.now();
+    if(reduce){ el.textContent = target.toLocaleString("en-US") + suffix; return; }
+    (function tick(now){
+      var p = Math.min((now - start) / dur, 1),
+          eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString("en-US") + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString("en-US") + suffix;
+    })(start);
+  }
+  var counters = document.querySelectorAll("[data-count]");
+  if("IntersectionObserver" in window){
+    var countObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ countUp(e.target); countObserver.unobserve(e.target); }
+      });
+    }, {threshold:.6});
+    counters.forEach(function(el){ countObserver.observe(el); });
+  } else {
+    counters.forEach(countUp);
+  }
+
+  /* ---- case-study players: click to play, one at a time -------------- */
+  function pauseAllExcept(keep){
+    document.querySelectorAll("video").forEach(function(v){
+      if(v !== keep && !v.paused) v.pause();
+    });
+  }
+  document.querySelectorAll("[data-player]").forEach(function(shell){
+    var video = shell.querySelector("video"),
+        btn = shell.querySelector("[data-play]");
+    if(!video || !btn) return;
+    btn.addEventListener("click", function(){
+      pauseAllExcept(video);
+      shell.classList.add("playing");
+      video.setAttribute("controls","");
+      var p = video.play(); if(p && p.catch) p.catch(function(){});
+    });
+    video.addEventListener("pause", function(){
+      if(video.currentTime === 0) shell.classList.remove("playing");
+    });
+  });
+
+  /* ---- archive tiles: preview on hover, filter by category ----------- */
+  document.querySelectorAll(".tile").forEach(function(tile){
+    var v = tile.querySelector("video");
+    if(!v || reduce) return;
+    tile.addEventListener("mouseenter", function(){
+      var p = v.play(); if(p && p.catch) p.catch(function(){});
+    });
+    tile.addEventListener("mouseleave", function(){ v.pause(); v.currentTime = 0; });
+  });
+
+  var filterBar = document.getElementById("filters"),
+      tiles = Array.prototype.slice.call(document.querySelectorAll(".tile"));
+  filterBar.addEventListener("click", function(e){
+    var btn = e.target.closest("button[data-filter]");
+    if(!btn) return;
+    var cat = btn.getAttribute("data-filter");
+    filterBar.querySelectorAll("button").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b === btn));
+    });
+    tiles.forEach(function(t){
+      var cats = (t.getAttribute("data-cats") || "").split(" ");
+      t.hidden = !(cat === "all" || cats.indexOf(cat) !== -1);
+    });
+  });
+
+  /* ---- hero reel: contained, auto-cycling, pauses off-screen --------- */
+  var CLIPS = [
+    {src:"showreel/_assets/loop-e6.mp4",      poster:"showreel/_assets/e6.jpg",      title:"E6 APEX",              sub:"Procedural terrain pipeline · UE5"},
+    {src:"showreel/_assets/loop-cradle.mp4",  poster:"showreel/_assets/cradle.jpg",  title:"Cradle of Sins",       sub:"Server-authoritative combat · UE"},
+    {src:"showreel/_assets/loop-bodycam.mp4", poster:"showreel/_assets/bodycam.jpg", title:"Bodycam Tactical FPS", sub:"Squad AI &amp; camera systems · UE5"},
+    {src:"showreel/_assets/loop-sawyer.mp4",  poster:"showreel/_assets/sawyer.jpg",  title:"Sawyer 2.0",           sub:"AI assistant in the Unity Editor"},
+    {src:"showreel/_assets/loop-prayer.mp4",  poster:"showreel/_assets/prayer.jpg",  title:"Say A Prayer",         sub:"Shipped PlayStation title"}
+  ];
+  var reelShell = document.getElementById("reelVideo"),
+      reelVideo = document.getElementById("reelPlayer"),
+      reelPoster = document.getElementById("reelPoster"),
+      reelTitle = document.getElementById("reelTitle"),
+      reelSub = document.getElementById("reelSub"),
+      reelCycle = document.getElementById("reelCycle"),
+      reelIndex = 0, reelTimer = null, reelVisible = false;
+
+  CLIPS.forEach(function(clip, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", clip.title);
+    b.setAttribute("aria-current", String(i === 0));
+    b.addEventListener("click", function(){ showClip(i, true); });
+    reelCycle.appendChild(b);
+  });
+
+  function showClip(i, manual){
+    reelIndex = i;
+    var clip = CLIPS[i];
+    reelPoster.src = clip.poster;
+    reelVideo.src = clip.src;
+    reelTitle.textContent = clip.title;
+    reelSub.innerHTML = clip.sub;
+    reelCycle.querySelectorAll("button").forEach(function(b, n){
+      b.setAttribute("aria-current", String(n === i));
+    });
+    if(reelVisible && !reduce){
+      var p = reelVideo.play();
+      if(p && p.then) p.then(function(){ reelShell.classList.add("playing"); }).catch(function(){});
+    }
+    if(manual) restartCycle();
+  }
+  function nextClip(){ showClip((reelIndex + 1) % CLIPS.length, false); }
+  function restartCycle(){
+    clearInterval(reelTimer);
+    if(!reduce && reelVisible) reelTimer = setInterval(nextClip, 7000);
+  }
+
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(entries){
+      reelVisible = entries[0].isIntersecting;
+      if(reelVisible && !reduce){
+        var p = reelVideo.play();
+        if(p && p.then) p.then(function(){ reelShell.classList.add("playing"); }).catch(function(){});
+        restartCycle();
+      } else {
+        reelVideo.pause();
+        clearInterval(reelTimer);
+      }
+    }, {threshold:.25}).observe(reelShell);
+  }
+})();
+</script>
+</body>
+</html>
